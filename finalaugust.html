@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 Happy Birthday GUNGUN 🎉</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+    .page {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 1s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .btns {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background: #ff4081;
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff4081;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    h1, h2 {
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px black;
+    }/* Backgrounds */
+.page1 { background: linear-gradient(to top, #000000, #ff00cc); }
+.page2 { background: linear-gradient(to top, #1d2b64, #f8cdda); }
+.page3 { background: radial-gradient(circle at center, #ffe259, #ffa751); }
+.page4 { background: linear-gradient(45deg, #fc466b, #3f5efb); }
+
+/* Balloons */
+.balloon {
+  width: 30px;
+  height: 40px;
+  background: red;
+  border-radius: 50% 50% 50% 50%;
+  position: absolute;
+  animation: float 10s infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Cake */
+.cake {
+  width: 200px;
+  height: 200px;
+  background: pink;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+.cake:after {
+  content: "🎂";
+  font-size: 100px;
+}
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: yellow;
+  animation: explode 1s ease forwards;
+}
+@keyframes explode {
+  to {
+    transform: translate(200px, -200px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Greeting Card */
+.card {
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #fff;
+  background: white;
+  color: black;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+
+  </style>
+</head>
+<body>  <!-- Page 1: Welcome -->  <div class="page page1 visible" id="page1">
+    <h1>🎂 Happy Birthday AKASH  🎉</h1>
+    <div class="btns">
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </div>  <!-- Page 2: Message -->  <div class="page page2 hidden" id="page2">
+    <h1>I have something special for you 💝</h1>
+    <div class="btns">
+      <button onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </div>  <!-- Page 3: Cake -->  <div class="page page3 hidden" id="page3">
+    <div class="cake" onclick="cutCake()"></div>
+    <div class="btns">
+      <button onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </div>  <!-- Page 4: Greeting Card -->  <div class="page page4 hidden" id="page4">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">🎁 Open Me</div>
+        <div class="card-back">💖 You are Special!</div>
+      </div>
+    </div>
+    <div class="btns">
+      <button onclick="prevPage()">Back</button>
+    </div>
+  </div>  <script>
+    let current = 1;
+    function showPage(n) {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`page${i}`).classList.add('hidden');
+        document.getElementById(`page${i}`).classList.remove('visible');
+      }
+      document.getElementById(`page${n}`).classList.remove('hidden');
+      document.getElementById(`page${n}`).classList.add('visible');
+      current = n;
+    }
+    function nextPage() {
+      if (current < 4) showPage(current + 1);
+    }
+    function prevPage() {
+      if (current > 1) showPage(current - 1);
+    }
+    function cutCake() {
+      for (let i = 0; i < 50; i++) {
+        const conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.top = '50%';
+        conf.style.left = '50%';
+        conf.style.background = `hsl(${Math.random()*360},100%,50%)`;
+        conf.style.position = 'absolute';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 1000);
+      }
+    }
+    // Generate balloons
+    for (let i = 0; i < 20; i++) {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = Math.random() * 100 + 'vw';
+      b.style.background = `hsl(${Math.random()*360}, 80%, 60%)`;
+      b.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(b);
+    }
+  </script></body>
+</html>
